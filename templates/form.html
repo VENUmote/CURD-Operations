@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Optional: Custom font for a nicer look */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Basic styling for Django form fields */
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        textarea {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 0.375rem; /* rounded-md */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #6366f1; /* indigo-500 */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5); /* focus:ring-indigo-500 */
+        }
+        .errorlist {
+            color: #ef4444; /* red-500 */
+            font-size: 0.875rem; /* text-sm */
+            margin-top: 0.25rem; /* mt-1 */
+            list-style: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl border border-gray-200">
+        <h1 class="text-3xl font-semibold text-gray-700 mb-6 text-center">{{ title }}</h1>
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <div>
+                <label for="{{ form.firstname.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.firstname.label }}
+                </label>
+                <input type="text" name="{{ form.firstname.name }}" id="{{ form.firstname.id_for_label }}" value="{{ form.firstname.value|default:'' }}" class="block w-full px-4 py-2 border border-gray-300 rounded-md">
+                {% if form.firstname.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.firstname.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.lastname.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.lastname.label }}
+                </label>
+                <input type="text" name="{{ form.lastname.name }}" id="{{ form.lastname.id_for_label }}" value="{{ form.lastname.value|default:'' }}" class="block w-full px-4 py-2 border border-gray-300 rounded-md">
+                {% if form.lastname.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.lastname.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.age.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.age.label }}
+                </label>
+                <input type="number" name="{{ form.age.name }}" id="{{ form.age.id_for_label }}" value="{{ form.age.value|default:'' }}" class="block w-full px-4 py-2 border border-gray-300 rounded-md">
+                {% if form.age.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.age.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="{{ form.branch.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.branch.label }}
+                </label>
+                <input type="text" name="{{ form.branch.name }}" id="{{ form.branch.id_for_label }}" value="{{ form.branch.value|default:'' }}" class="block w-full px-4 py-2 border border-gray-300 rounded-md">
+                {% if form.branch.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.branch.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div class="flex justify-end space-x-4 mt-6">
+                <a href="{% url 'view' %}" class="px-6 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out transform hover:scale-105">
+                    Cancel
+                </a>
+                <button type="submit" class="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out transform hover:scale-105">
+                    Add Student
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

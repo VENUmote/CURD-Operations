@@ -1,0 +1,40 @@
+{% extends 'form.html' %}
+{% include 'edit.html' %}
+<html>
+    <head>
+        <title>{{title}}</title>
+        <style>
+            .main{
+                width:100px;
+                background-color:yellow;
+                align-items:center;
+            }
+        </style>
+    </head>
+    <body>
+        {% for i in venu%}
+        <div class="main"> {{forloop.last}}  {{i}}</div>
+        {% endfor %}
+        <table border="1" cellpadding="10" >
+            <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+            </tr>
+            {% for i in student%}
+            <tr>
+                <th>{{i.name}}</th>
+                <th>{{i.mobile  }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if number|length > 0 %}
+        {% for i in number%}
+        {% if i > 20 %}
+        <div >{{i}} </div>
+        {% endif %}
+        {% endfor %}
+        {%  else %}
+        NO data found
+        {% endif%}
+    </body>
+</html>
